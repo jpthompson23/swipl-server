@@ -10,3 +10,22 @@ You must install SWI-Prolog.  You can download it on Ubuntu like so:
     sudo apt-get install swi-prolog
     
 It comes with the http package required to run the server.
+
+## Usage:
+
+    from swiplclient import PrologDB
+    
+    PL_HOST = "localhost"
+    PL_PORT = 5000
+    PL_PASSWORD = "xyzzy"
+    
+    prolog = PrologDB(PL_HOST, PL_PORT, PL_PASSWORD)
+    
+    # Sample assertions and query:
+    
+    prolog.add("father(jack, john)")
+    prolog.add("brothers(joey, jack)")
+    prolog.add("brothers(A,B) :- "
+                            "B @< A, brothers(B,A)") # Make brothers/2 symmetric
+    prolog.add("uncle(X,Y) :- brothers(Z,X), father(Z,Y)")
+    print prolog.query("uncle(Uncle,Nephew)") 

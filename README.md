@@ -28,4 +28,6 @@ It comes with the http package required to run the server.
     prolog.add("brothers(A,B) :- "
                             "B @< A, brothers(B,A)") # Make brothers/2 symmetric
     prolog.add("uncle(X,Y) :- brothers(Z,X), father(Z,Y)")
-    print prolog.query("uncle(Uncle,Nephew)") 
+    print prolog.query("uncle(Uncle,Nephew)")
+
+DISCLAIMER: This code is provided as-is.  I take no responsibility for any security vulnerabilities related to hosting a server that executes procedures called remotely.  There's a password that can be set for the server, but that's just my little band-aid -- I don't know enough about SWI-Prolog to know whether this program is secure.

@@ -11,16 +11,14 @@ class PrologDB(object):
         self.password = password
         self.headers = { 'Content-Type' : 'application/json' }
     def __construct_json(self, action):
-        # It's necessary to use construct_json() to construct a json dictionary 
-        #   rather than constructing a Python dictionary and using json.dumps().  
-        #   This is because Prolog can only efficiently read the dictionary 
-        #   keys in a pre-defined order, and Python dictionaries do not 
-        #   preserve key order.
-        password = self.password
-        action_part = '"'.join(['action',':',action])
-        password_part = '"'.join(['password',':',password])
-        jdata = '{ "%s", "%s" }' % (action_part, password_part)
-        return jdata
+        # It's necessary to sort the keys because Prolog can only read the dict
+        #   if the keys are in a pre-defined order, and Python dictionaries do 
+        #   not preserve key order.
+        return json.dumps(
+            {
+              'action':action, 
+              'password':self.password
+            }, sort_keys=True)
     def __server_call(self, url, pl_string):
         jdata = self.__construct_json(pl_string)
         req = urllib2.Request(url, jdata, self.headers)

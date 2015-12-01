@@ -27,4 +27,4 @@ You must install the latest development version of SWI-Prolog (it needs to have 
     print prolog.query("uncle(Uncle,Nephew)")
 
 #### DISCLAIMER:
-This code is provided *as-is*.  I take no responsibility for any security vulnerabilities related to hosting a server on your machine that executes procedures called by a remote client.  There's a password that can be set for the server, but that's just my little band-aid.  Obviously, since this program doesn't use SSL, anyone sniffing your traffic can get the password.  So just be careful.  I take no responsibility for anything going wrong.
+This code is provided *as-is*.  Be aware that this SWI-Prolog script runs a server that listens for and executes queries, and it may be possible for a client to use this maliciously.  I take no responsibility for anything going wrong.
